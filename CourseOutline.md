@@ -24,7 +24,7 @@ At the end of this course, students should be able to:
 
 # Course Contents
 
-## Infrastructure as Code and Automated Deployments 
+1. Infrastructure as Code and Automated Deployments 
 
 -   What is IaC
 
@@ -32,7 +32,7 @@ At the end of this course, students should be able to:
 
 -   Terraform, Cloudformation, SAM and others
 
-## Infrastructure in Source Control -- Git 
+2. Infrastructure in Source Control -- Git 
 
 -   Introduction to Git
 
@@ -42,7 +42,7 @@ At the end of this course, students should be able to:
 
 -   Triggering pipelines from Git hooks
 
-## Effective Git Usage 
+3. Effective Git Usage 
 
 -   Working with a local Git repository
 
@@ -54,7 +54,7 @@ At the end of this course, students should be able to:
 
 -   Git best practices and pull requests
 
-## IaC and DevOps 
+4. IaC and DevOps 
 
 -   Performing automated deployments
 
@@ -64,7 +64,7 @@ At the end of this course, students should be able to:
 
 -   In place rolling updates
 
-## Terraform Fundamentals 
+5. Terraform Fundamentals 
 
 -   Understanding how Terraform Works
 
@@ -74,7 +74,7 @@ At the end of this course, students should be able to:
 
 -   Deploying a load balanced cluster of servers using Terraform
 
-## Understanding the Terraform Language HCL 
+6. Understanding the Terraform Language HCL 
 
 -   Arguments and Blocks
 
@@ -88,7 +88,7 @@ At the end of this course, students should be able to:
 
 -   Style conventions
 
-## Terraform Datatypes 
+7. Terraform Datatypes 
 
 -   Working with strings and numbers
 
@@ -98,7 +98,7 @@ At the end of this course, students should be able to:
 
 -   Using variables as input and output values
 
-## Terraform Functions 
+8. Terraform Functions 
 
 -   String and number functions
 
@@ -110,7 +110,7 @@ At the end of this course, students should be able to:
 
 -   File system and date related functions
 
-## Terraform Constructs 
+9. Terraform Constructs 
 
 -   Looping with for_each
 
@@ -122,7 +122,7 @@ At the end of this course, students should be able to:
 
 -   Using Meta-arguments
 
-## The Terraform CLI 
+10. The Terraform CLI 
 
 -   Understanding the core commands
 
@@ -130,7 +130,7 @@ At the end of this course, students should be able to:
 
 -   Using init, plan and apply
 
-## Working with Terraform Modules 
+11. Working with Terraform Modules 
 
 -   Using registry based modules
 
@@ -138,7 +138,7 @@ At the end of this course, students should be able to:
 
 -   Publishing custom modules to a registry
 
-## Managing State using Terraform 
+12. Managing State using Terraform 
 
 -   How do you know what you have
 
@@ -149,7 +149,7 @@ At the end of this course, students should be able to:
 -   Deploying, tracking and updating deployments using Terraform
     enterprise
 
-## Configuration Management with Ansible 
+13. Configuration Management with Ansible 
 
 -   Introduction to Configuration management tools
 
@@ -159,15 +159,15 @@ At the end of this course, students should be able to:
 
 -   Deploying an updated application using Ansible
 
-## When to use Ansible or Terraform 
+14. When to use Ansible or Terraform 
 
 -   What should generally be done in Terraform
 
 -   What should generally done using Ansible
 
 -   Combining Terraform and Ansible
-
-## Extended Project 
+  
+15.  Extended Project 
 
 -   You are provided a sample Spring/React fullstack application
 
