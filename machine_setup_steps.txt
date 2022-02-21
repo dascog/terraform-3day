@@ -1,0 +1,15 @@
+# I have already installed terraform using chocolatey on the VMs, and configured the auto-complete option.
+# I have a user group on AWS IAM that has the following permissions:
+## AmazonVPCFullAccess
+## AmazonEC2FullAccess
+## AmazonS3FullAccess
+# I created a secret key from that account and used it to configure the AWS CLI on a VM (note: this will be deleted before the machine image is frozen.)
+
+# Using the CLIs
+## You will need to help them decide which shell they are going to use. Most of what we will do will be through the command line. I have been using Git Bash and PowerShell with no problems. 
+
+
+
+
+# TIDY UP
+1. delete ~/.aws/credentials
