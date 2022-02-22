@@ -1,4 +1,4 @@
-# Exercise 1.1 First Terraform Deployment
+# Exercise 0.1 First Terraform Deployment
 
 ## 1. Download and unzip the 1.1-FirstDeployment directory 
 Your instructor will provide you with a link. Put it somewhere accessible on your VM (like the desktop, or the C:\Users\Administrator directory). You may wish to create a directory like "terraform-learning" on your VM to collect the exercises. 
