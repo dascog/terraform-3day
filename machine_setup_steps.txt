@@ -12,7 +12,10 @@
 - I have tried to get full functionality for Docker on Windows using the steps in https://blog.sixeyed.com/getting-started-with-docker-on-windows-server-2019/
 - It does mean Linux native containers like nginx will not work. I have replaced these with windows containers in the examples. 
 
-
+# Webhook Demo
+## This requires something setup on your VM to receive the Webhook POST request
+- I followed the suggestions at https://docs.github.com/en/github-ae@latest/developers/webhooks-and-events/webhooks/creating-webhooks
+- For the VMs I installed ngrok on Windows (https://ngrok.com/download), but found the Ruby install needed for Sinatra just wasn't sufficient on the Windows side, so I installed Ruby in the Ubuntu shell and it worked fine. There is a weird windows bug in the Ubuntu shell - the workaround fix was ``export TERM=xterm-color``. Apparently MS will release a proper fix soon.
 
 
 # TIDY UP
