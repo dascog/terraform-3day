@@ -1,4 +1,4 @@
-# Exercise 0.2 AWS EC2 Deployment
+# Exercise 0.2 AWS EC2 Deployment (20-30mins)
 In this lab you will set up the AWS CLI so that you can manage AWS infrastructure with the Terraform command line. You will demonstrate this by deploying the EC2 image you saw in the teaching session. 
 
 ## 1. Generate you AWS Access Keys 
