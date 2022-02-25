@@ -20,3 +20,5 @@
 
 # TIDY UP
 1. delete ~/.aws/credentials
+2. delete ~/terraform
+3. delete ~/terraform-3day
