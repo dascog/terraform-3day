@@ -18,6 +18,17 @@
 - For the VMs I installed ngrok on Windows (https://ngrok.com/download), but found the Ruby install needed for Sinatra just wasn't sufficient on the Windows side, so I installed Ruby in the Ubuntu shell and it worked fine. There is a weird windows bug in the Ubuntu shell - the workaround fix was ``export TERM=xterm-color``. Apparently MS will release a proper fix soon.
 
 
+# docker-compose installation
+## This is required for one of the tutorials 
+- web page https://docs.docker.com/compose/install/, look under Windows Server
+- In a PowerShell running as Administrator: 
+$ SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$ Invoke-WebRequest "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-
+Windows-x86_64.exe" -UseBasicParsing -OutFile $Env:ProgramFiles\Docker\docker-compose.exe
+PS C:\Users\Administrator> docker-compose --version
+- test installation:
+$ docker-compose --version
+
 # TIDY UP
 1. delete ~/.aws/credentials
 2. delete ~/terraform
