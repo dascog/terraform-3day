@@ -26,4 +26,15 @@ This exercise combines a series of hashicorp terraform tutorials that cover some
 ## 6. Refactor a Monolithic Terraform Configuration (20mins)
 - This tutorial offers you an interactive terminal, if it does not launch just use your normal VM environment.
 - https://learn.hashicorp.com/tutorials/terraform/organize-configuration?in=terraform/modules
-- 
+
+## 7. Use Configuration to Move Resources (20mins)
+- https://learn.hashicorp.com/tutorials/terraform/move-config?in=terraform/configuration-language 
+## 7. Develop Configuration with the Console (15mins)
+- This tutorial uses the Terraform Console to develop an access policy for an S3 bucket so the contents can only be accessible from the IP address of your VM. 
+- The terraform console does not provide much command line interaction (no history, no cursor movement with arrow keys etc).
+- On your VMs you may find ``terraform init`` fails because of a versioning problem. If you proceed with ``terraform init -upgrade`` it should work fine.
+- In the ``main.tf`` file the line ``acl = "private" `` in the ``aws_s3_bucket`` resource is not compatible with the upgraded version of terraform (it is automatically put in on creation). Change this to ``acl = null`` before applying the configuration.
+- https://learn.hashicorp.com/tutorials/terraform/console 
+
+## 8. Create Dynamic Expressions (20mins)
+- https://learn.hashicorp.com/tutorials/terraform/expressions?in=terraform/configuration-language 
