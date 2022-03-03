@@ -18,7 +18,6 @@
 - I followed the suggestions at https://docs.github.com/en/github-ae@latest/developers/webhooks-and-events/webhooks/creating-webhooks
 - For the VMs I installed ngrok on Windows (https://ngrok.com/download), but found the Ruby install needed for Sinatra just wasn't sufficient on the Windows side, so I installed Ruby in the Ubuntu shell and it worked fine. There is a weird windows bug in the Ubuntu shell - the workaround fix was ``export TERM=xterm-color``. Apparently MS will release a proper fix soon.
 
-
 # docker-compose installation
 ## This is required for one of the tutorials 
 - web page https://docs.docker.com/compose/install/, look under Windows Server
@@ -30,7 +29,7 @@ PS C:\Users\Administrator> docker-compose --version
 - test installation:
 $ docker-compose --version
 
-# CDKTF installation
+# CDKTF installation (Not Used)
 - This is a package to automatically transfer between other languages and HCL. 
 - Installed for the JSON encoding demo
 $ npm install --global cdktf-cli@latest
