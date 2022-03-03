@@ -30,6 +30,11 @@ PS C:\Users\Administrator> docker-compose --version
 - test installation:
 $ docker-compose --version
 
+# CDKTF installation
+- This is a package to automatically transfer between other languages and HCL. 
+- Installed for the JSON encoding demo
+$ npm install --global cdktf-cli@latest
+
 # TIDY UP
 1. delete ~/.aws/credentials
 2. delete ~/terraform
