@@ -4,6 +4,7 @@
 ## AmazonEC2FullAccess
 ## AmazonS3FullAccess
 ## AmazonRDSFullAccess
+## AmazonDynamoDBFullAccess
 # I created a secret key from that account and used it to configure the AWS CLI on a VM (note: this will be deleted before the machine image is frozen.)
 
 # Using the CLIs
