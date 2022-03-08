@@ -35,7 +35,37 @@ $ docker-compose --version
 - Installed for the JSON encoding demo
 $ npm install --global cdktf-cli@latest
 
+# Ansible installation (and AWS on the WSL)
+- This is necessary for the Ansible tutorials
+- It can only be installed on the WSL, so you have to use the Ubuntu shell
+$sudo apt update; sudo apt install ansible
+$sudo apt install python3-pip # need the pip package to install boto3
+$sudo pip3 install boto boto3
+$sudo apt install awscli
+- create a user for Ansible:
+$ useradd --create-home --shell /usr/bin/bash ansible
+$ passwd ansible
+- password for ansible is ***REMOVED***
+- Note when you login to the ansible account, I have set the TERM environment variable to vt220 in the .bashrc file. This fixes a scroll bug - when you clear the screen the prompt disappears and you can't see anything you type. With the vt220 TERM all seems to function normally.
+- Also seems like a good idea to add ansible to the sudoer group:
+$ usermod -aG sudo ansible
+
+# Ansible SSH key setup
+- login as the ansible user
+$ssh-keygen -t rsa -P ""
+- Accept the defaults
+- This generates an rsa key pair (id_rsa, id_rsa.pub) in the directory ~/.ssh
+
+
+
+
+
+
+
+
+
 # TIDY UP
 1. delete ~/.aws/credentials
 2. delete ~/terraform
 3. delete ~/terraform-3day
+4  from the ubuntu shell: delete ~/.aws/credentials
