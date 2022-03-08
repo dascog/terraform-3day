@@ -21,7 +21,7 @@
             cidr_ip: 0.0.0.0/0
       register: basic_firewall
 
-    - name: Create ec2 instancec
+    - name: Create ec2 instance
       ec2:
         instance_type: t2.micro
         image: ami-060c4f2d72966500a

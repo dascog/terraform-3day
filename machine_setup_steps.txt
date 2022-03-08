@@ -48,16 +48,18 @@ $ passwd ansible
 - password for ansible is ***REMOVED***
 - Note when you login to the ansible account, I have set the TERM environment variable to vt220 in the .bashrc file. This fixes a scroll bug - when you clear the screen the prompt disappears and you can't see anything you type. With the vt220 TERM all seems to function normally.
 - Also seems like a good idea to add ansible to the sudoer group:
-$ usermod -aG sudo ansible
+$ usermod -aG sudo ansible 
+- Then edit the /etc/sudoers file so sudo users don't need to supply a password
+$sudo vi /etc/sudoers
+- change the line that starts %sudo to 
+%sudo	ALL=(ALL:ALL) NOPASSWD:ALL
 
-# Ansible SSH key setup
-- login as the ansible user
-$ssh-keygen -t rsa -P ""
-- Accept the defaults
-- This generates an rsa key pair (id_rsa, id_rsa.pub) in the directory ~/.ssh
-
-
-
+- It works best if localhost is added to the ansible hosts list
+- 
+$ sudo vi /etc/ansible/hosts 
+- then append the following lines to the end of the file:
+[mylocalhost]
+localhost ansible_connection=local
 
 
 
