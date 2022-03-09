@@ -1,0 +1,7 @@
+---
+
+  - hosts: aws
+    become: yes
+    tasks:
+            - debug: msg="Ansible is working!"
+            - yum: name=cowsay state=absent
