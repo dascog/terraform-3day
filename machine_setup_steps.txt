@@ -61,7 +61,8 @@ $ sudo vi /etc/ansible/hosts
 [mylocalhost]
 localhost ansible_connection=local
 
-
+# Terraform on the WSL
+- Just in case someone wants this I have installed Terraform on the Ubuntu shell as well as in windows proper. Instructions are at https://learn.hashicorp.com/tutorials/terraform/install-cli
 
 
 

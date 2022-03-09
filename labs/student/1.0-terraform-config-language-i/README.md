@@ -1,4 +1,4 @@
-# Exercise 0.5a The Terraform Configuration Language
+# Exercise 1.0 The Terraform Configuration Language I
 This exercise combines a series of hashicorp terraform tutorials that cover some of the configuration language features we have learned so far.
 ## 1. Define Infrastructure with Terraform Resources (20-30min)
 - https://learn.hashicorp.com/tutorials/terraform/resource?in=terraform/configuration-language

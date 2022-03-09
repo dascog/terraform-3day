@@ -14,6 +14,6 @@ This lab follows exactly one of the Terraform tutorials, however we note some mi
 * On the top-right of the Terminal frame the kind of shell you are using is displayed. If it is anything other than `bash`, click on the down arrow by the `+` sign and select the Git Bash option. 
 ## 4. Follow the instructions in the Tutorial
 * All the instructions *should* execute as expected with the exception of the following corrections:
-* * In the `green.tf` file there is an error on line 8. The init-script filename should be `init-script.sh`.
+** In the `green.tf` file there is an error on line 8. The init-script filename should be `init-script.sh`.
 ## 8. Remember to clean up your resources before finishing
 * `terraform destroy`

@@ -1,6 +1,6 @@
 # Exercise 0.1 First Terraform Deployment (20-30mins)
 
-## 1. Download and unzip the 1.1-FirstDeployment directory 
+## 1. Download and unzip the 0.1-first-deployment directory 
 Your instructor will provide you with a link. Put it somewhere accessible on your VM (like the desktop, or the C:\Users\Administrator directory). You may wish to create a directory like "terraform-learning" on your VM to collect the exercises. 
 ## 2. Open Visual Studio Code (or navigate from a command line)
 * Double click on the icon on your desktop then use File->Open Folder to open the folder you just created.
