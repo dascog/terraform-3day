@@ -64,7 +64,9 @@ localhost ansible_connection=local
 # Terraform on the WSL
 - Just in case someone wants this I have installed Terraform on the Ubuntu shell as well as in windows proper. Instructions are at https://learn.hashicorp.com/tutorials/terraform/install-cli
 
-
+# MYSQL
+- added the mysql.exe path to the PATH variable in git bash:
+$ export PATH=/c/Program\ Files/MySQL/MySQL\ Server\ 8.0/bin:$PATH
 
 
 # TIDY UP
@@ -72,3 +74,4 @@ localhost ansible_connection=local
 2. delete ~/terraform
 3. delete ~/terraform-3day
 4  from the ubuntu shell: delete ~/.aws/credentials
+5. Clear out the Downloads folder and empty the trash
