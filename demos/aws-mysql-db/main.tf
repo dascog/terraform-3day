@@ -77,7 +77,8 @@ resource "aws_db_instance" "db" {
   publicly_accessible    = true
   skip_final_snapshot    = true
 
+  # Initialize the database with a schema
   provisioner "local-exec" {
-    command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ./schema.sql"
+    command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ${var.db_schema_path}"
   }
 }

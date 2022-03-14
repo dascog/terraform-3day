@@ -18,3 +18,9 @@ variable "db_password" {
   sensitive   = true
   default = "***REMOVED***"
 }
+
+variable "db_schema_path" {
+  description = "Full path to the database schema"
+  type = string
+  default = "./schema.sql"
+} 
