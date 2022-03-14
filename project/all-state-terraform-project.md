@@ -2,17 +2,33 @@
 
 To be completed in your breakout groups on the final afternoon.
 
-This exercise gets more sophisticated as you proceed
+This exercise gets more sophisticated as you proceed, you may not complete all the steps. 
 
 1. First you will write a configuration that deploys a standalone Java Spring application that requires no database to an EC2 instance and run it, making sure it works. 
-2. Then you will deploy the same app, but with a version that requires a database. 
+2. Then you will deploy the same app, but with a version that connects to an existing database. 
 3. Then you will look at a configuration that creates an auto-scaled, load balanced deployment of the application.
+4. Finally you will provision your own version of the database using Terraform, and modify your configuration to automatically connect to that database.
 
 
-## The Basic Application (no database)
-The basic application can be found at https://tinyurl.com/CompactDiscRestNoDatabase. 
+## Step 1: The Basic Application (no database)
+The basic application can be found at https://tinyurl.com/CompactDiscRestNoDatabase. To deploy this you will need to 
+- Create an aws_security_group resource with TCP ingress on port 8080, and open egress. 
+- Provision an EC2 Amazon Linux instance (a t2.micro type is sufficient). 
+- Run an initial setup shell script using the ``user_data=...`` argument to aws_instance. THe shell script needs to install an appropriate version of Java on the machine, then copy the application jar file to the local directory, and finally set the application running. The following shell script is an example
 
-## The Database Application Connected to an Existing Database
+```
+#!/bin/bash
+yum update -y
+yum -y install java-1.8.0
+cd /home/ec2-user
+wget https://tinyurl.com/CompactDiscRestNoDatabase
+nohup java -jar CompactDiscRestNoDatabase.jar > ec2dep.log
+```
+
+- You can verify the application is running by pointing your browser at ``http://<your-ec2-dns>:8080/api``.
+- Destroy your resources afterwards, remembering to answer "yes" at the prompt. 
+  
+## Step 2: The Database Application Connected to an Existing Database
 Databases tend to require persistent infrastructure and should be deployed independently of applications needing to access them. For this part of the project you should deploy an EC2 instance as you did in the previous section, but now with an application that requires access to a database to run. The application jar can be found at https://tinyurl.com/CompactDiscRestWithDatabase. 
 
 To get the connection working properly you will need to create a file called application.properties in the same directory as the jar file on your EC2 instance. This file should contain the following:
@@ -22,33 +38,41 @@ spring.datasource.url=jdbc:mysql://cloudessentialsworkshop.cfw1ttrlhzus.eu-west-
 spring.datasource.username=root
 spring.datasource.password=***REMOVED***1
 ```
+- Test you application as in the previous step. 
+- Destroy your resources afterwards, remembering to answer "yes" at the prompt. 
 
-## The Database Application Behind an Elastic Load Balancer
+## Step 3: The Database Application Behind an Elastic Load Balancer
 In this step you will deploy exactly the same application setup as in the previous step, but this time it will deploy behind as instances spawned by an ELB. 
 - You can use as a basis the demo walkthrough we did for deploying a load balanced app (under demo/autoscaling-ec2 on the website), together with your previous deployment.
-- create the security keys and include them 
 - make sure that your load balancer health check target is set to "HTTP:8080/api/" which is the api destination page on the EC2 instances.
+- The ELB redirects all traffic on its default HTTP port (port 80) to port 8080 of the instances. So to test your configuration you just need to put ``http://<your-elb-dns-name>/api`` in a browser and the REST output should come up. Note that Load Balancers can take quite a while to come up - you can check the health of the ELB instances by going to the EC2 page in the AWS console, then click on "Load Balancers" on the left hand panel, and find the "Monitoring" tab down the bottom. Refresh until you start to see the Healthy Hosts graph showing a positive number. 
+- Destroy your resources afterwards, remembering to answer "yes" at the prompt. 
 
-## Deploy Your Own Database Using Teraform
-For this section you will provision a MySQL
-
-
-## The Database Application
-Databases tend to require persistent infrastructure and should be deployed independently of applications needing to access them. For the following two sections you should provision a MySQL database using a different Terraform configuration to your application configuration, and access the database using remote login credentials. 
-- Create a Terraform configuration and deploy a MySQL database using the aws_db_instance resource. This should be initialized using the schema.sql file in the project directory. You can test your MySQL installation using the MySQL workbench in your VMs to connect to the remote db. 
-- Copy your Basic Application to a new directory and change the application file to https://tinyurl.com/CompactDiscRestWithDatabase. The application will run but fail to load because of the lack of database connection. 
-- To connect to the remote database Spring Boot needs a configuration file called application.properties in the same directory as your jar file, with contents as follows:
+## Step 4: Deploy Your Own Database Using Terraform and Connect to Your Load-Balanced Application.
+For this section you will provision your own version of the MySQL database (in a separate configuration), and use the outputs from that configuration (via terraform_remote_state) to set up the application.properties file for the instances in the auto-scaling group.
+**Note** there seems to be an incompatibility between the versions of MySQL offered by AWS RDS, and the jar files we have access to. You are advised to use a MariaDB implementation (version 10.2.43 works fine) for your database instantiation. 
+- First create your database configuration. You can use the demo walkthrough we did for deploying a MySQL database (under demo/aws-db-mysql), just use ``"mariadb"`` instead of ``"mysql"`` and set the engine_version to "10.2.43"). We will use the same schema as in the demo, and you can access a MariaDB through the ``mysql`` command prompt so nothing needs to change there. Make sure your outputs include the ``rds_hostname``, the ``rds_port``, the ``rds_username`` and the  ``rds_password``.
+- Now create a separate configuration for your auto-scaling application. You should begin with a copy of your previous load-balanced configuration. 
+- In the launch configuration find where you wrote out the application.properties file. Clearly these parameters will change with your new database. You *could* just hardcode the values from your new database in, however you can make your configuration much more portable using a ``terraform_remote_state`` datasource to access the outputs of your database configuration. In the main.tf of your load-balanced application create a data source as follows:
 
 ```
-spring.datasource.url=jdbc:mysql://<your-database-dns>:<your-database-port>/conygre
-spring.datasource.username=username
-spring.datasource.password=password
+
+data "terraform_remote_state" "db" {
+  backend = "local"
+  config = {
+    path = "<RELATIVE_PATH_TO_YOUR_DB_TERRAFORM.TFSTATE_FILE>"
+   }
+}
+```
+- Edit the ``user_data`` argument of your ``aws_launch_configuration`` to access the database outputs at the relevant points. For example, your password line should look something like:
+
+```
+spring.datasource.password=${data.terraform_remote_state.db.outputs.rds_password}
 ```
 
-You will need to generate this file as part of your configuration using the terraform_remote_state data source to insert the information from the database configuration.
+- Make sure that you ``terraform apply`` your database first, and wait until it is up and running before applying your app configuration.
+- You can test your deployment in the same way as your previous load-balanced deployment. 
+- You must take care when destroying your resources to destroy the load-balanced deployment **first**, and only then destroy your database. Terraform uses the outputs of your database to determine the state of the configuration to destroy and will return an error if your database is destroyed prior to the load-balanced configuration.
 
-The deployment process should follow closely the demo/lab you saw during the course. The schema file for the database is in the project directory. Once you have created the database with the necessary schema, use the terraform_remote_state data source in your application configuration to access 
-
-We will use the AWS RDS provider to provision a MySQL database. 
-Once it is provisioned, either use the RDS console or the mysql CLI to access: CLI command- 
-$mysql -u $(terraform output -raw rds_username) -p -h $(terraform output -raw rds_hostname) -P $(terraform output -raw rds_port)
+## Optional Extra: Modules
+If you have time you could try to format your ELB configuration as a module, and create a new parent configuration that calls that module, supplying the necessary variable values. 

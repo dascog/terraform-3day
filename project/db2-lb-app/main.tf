@@ -55,6 +55,7 @@ resource "aws_security_group" "instance-sg" {
     to_port = 8080
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+
   }
   ingress {
     from_port = 22
@@ -71,17 +72,12 @@ resource "aws_security_group" "instance-sg" {
   }
 }
 
-# data "terraform_remote_state" "db" {
-#   backend = "local"
-#   config = {
-#     path = "../db/terraform.tfstate"
-#    }
-# }
-
-# resource "aws_key_pair" "ssh_key" {
-#   key_name = "ssh_key"
-#   public_key = file("ssh_key.pub")
-# }
+data "terraform_remote_state" "db" {
+  backend = "local"
+  config = {
+    path = "../db/terraform.tfstate"
+   }
+}
 
 # The Launch Configuration
 resource "aws_launch_configuration" "my_launch_config" {
@@ -90,7 +86,6 @@ resource "aws_launch_configuration" "my_launch_config" {
   instance_type          = var.instance_type
   # For now use the same SG as the ELB. This could be changed for a different one to prevent direct access
   security_groups        = [aws_security_group.instance-sg.id]
-  # key_name               = aws_key_pair.ssh_key.key_name
   user_data = <<-EOT
                 #!/bin/bash
                 yum update -y
@@ -98,9 +93,9 @@ resource "aws_launch_configuration" "my_launch_config" {
                 yum install ec2-instance-connect
                 cd /home/ec2-user
                 cat <<-EOF > application.properties
-                spring.datasource.url=jdbc:mysql://cloudessentialsworkshop.cfw1ttrlhzus.eu-west-2.rds.amazonaws.com:3306/conygre?useSSL=false
-                spring.datasource.username=root
-                spring.datasource.password=***REMOVED***1
+                spring.datasource.url=jdbc:mysql://${data.terraform_remote_state.db.outputs.rds_hostname}:${data.terraform_remote_state.db.outputs.rds_port}/conygre?useSSL=false
+                spring.datasource.username=${data.terraform_remote_state.db.outputs.rds_username}
+                spring.datasource.password=${data.terraform_remote_state.db.outputs.rds_password}
                 EOF
                 wget ${var.jarfile_url}
                 nohup java -jar ${var.jarfile_name} > ec2dep.log
