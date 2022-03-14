@@ -74,5 +74,5 @@ $ export PATH=/c/Program\ Files/MySQL/MySQL\ Server\ 8.0/bin:$PATH
 1. delete ~/.aws/credentials
 2. delete ~/terraform
 3. delete ~/terraform-3day
-4  from the ubuntu shell: delete ~/.aws/credentials
+4  from the ansible user in the ubuntu shell: delete ~/.aws/credentials
 5. Clear out the Downloads folder and empty the trash
