@@ -1,7 +1,7 @@
 # Exercise 0.4 AWS EC2 Deployment (20-30mins)
 In this lab you will set up the AWS CLI so that you can manage AWS infrastructure with the Terraform command line. You will demonstrate this by deploying the EC2 image you saw in the teaching session. 
 
-## 1. Generate you AWS Access Keys 
+## 1. Generate your AWS Access Keys 
 * Log into the AWS console  https://console.aws.amazon.com/console/home# either using your own account or one your instructor will supply. To set up CLI access you need quite high level access in your role, and Terraform will obviously need permissions to create the various resources you need.
 * Click on your username in the top right corner of the screen to expose the drop down, then select the "Security Credentials" option.
 * You cannot access the values of an existing access key directly, if there is one there then just create a second access key by clicking the "Create access key" button (you can have a maximum of 2 access keys per user account).
