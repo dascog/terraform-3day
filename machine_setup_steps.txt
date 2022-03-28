@@ -46,7 +46,7 @@ $sudo apt install awscli
 - create a user for Ansible:
 $ useradd --create-home --shell /usr/bin/bash ansible
 $ passwd ansible
-- password for ansible is ***REMOVED***
+- password for ansible is c0nygre
 - Note when you login to the ansible account, I have set the TERM environment variable to vt220 in the .bashrc file. This fixes a scroll bug - when you clear the screen the prompt disappears and you can't see anything you type. With the vt220 TERM all seems to function normally.
 - Also seems like a good idea to add ansible to the sudoer group:
 $ usermod -aG sudo ansible 

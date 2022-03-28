@@ -8,7 +8,7 @@ This lab follows exactly one of the Terraform tutorials, however we note some mi
 * Once the repository is cloned cd in to the repository directory and type the command `code .` to open VS Code in the current directory.
 ## 2. Update the required_version
 * Open the `versions.tf` file in VS Code and update the `required version` statement to `required version = "~> 1.1.0"`.
-## 3. Open up a Git bash terminal. 
+## 3. Open up a Git bash terminal in VS Code 
 * Some of the tutorial instructions require a linux command line. 
 * If it's not already visible, open the Terminals frame using `CTRL '` or View -> Terminal.
 * On the top-right of the Terminal frame the kind of shell you are using is displayed. If it is anything other than `bash`, click on the down arrow by the `+` sign and select the Git Bash option. 

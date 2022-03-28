@@ -36,7 +36,7 @@ To get the connection working properly you will need to create a file called app
 ```
 spring.datasource.url=jdbc:mysql://cloudessentialsworkshop.cfw1ttrlhzus.eu-west-2.rds.amazonaws.com:3306/conygre?useSSL=false
 spring.datasource.username=root
-spring.datasource.password=***REMOVED***1
+spring.datasource.password=c0nygre1
 ```
 - Test you application as in the previous step. 
 - Destroy your resources afterwards, remembering to answer "yes" at the prompt. 
