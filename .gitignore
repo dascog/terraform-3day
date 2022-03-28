@@ -1,6 +1,9 @@
 # Local .terraform directories
 **/.terraform/*
 
+# participants email list
+AllstateParticipantList.xlsx
+
 # jar files
 *.jar
 
