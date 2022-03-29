@@ -2,7 +2,7 @@
 **/.terraform/*
 
 # participants email list
-AllstateParticipantList.xlsx
+Allstate*
 
 # jar files
 *.jar
