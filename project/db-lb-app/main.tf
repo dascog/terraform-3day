@@ -100,7 +100,7 @@ resource "aws_launch_configuration" "my_launch_config" {
                 cat <<-EOF > application.properties
                 spring.datasource.url=jdbc:mysql://cloudessentialsworkshop.cfw1ttrlhzus.eu-west-2.rds.amazonaws.com:3306/conygre?useSSL=false
                 spring.datasource.username=root
-                spring.datasource.password=***REMOVED***1
+                spring.datasource.password=c0nygre1
                 EOF
                 wget ${var.jarfile_url}
                 nohup java -jar ${var.jarfile_name} > ec2dep.log
@@ -163,7 +163,7 @@ resource "aws_elb" "my-elb" {
 #                 cat <<-EOF > application.properties
 #                 spring.datasource.url=jdbc:mysql://cloudessentialsworkshop.cfw1ttrlhzus.eu-west-2.rds.amazonaws.com:3306/conygre?useSSL=false
 #                 spring.datasource.username=root
-#                 spring.datasource.password=***REMOVED***1
+#                 spring.datasource.password=c0nygre1
 #                 EOF
 #                 wget ${var.jarfile_url}
 #                 nohup java -jar ${var.jarfile_name} > ec2dep.log

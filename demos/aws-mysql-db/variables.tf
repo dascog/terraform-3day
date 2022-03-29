@@ -16,7 +16,7 @@ variable "db_username" {
 variable "db_password" {
   description = "RDS root user password"
   sensitive   = true
-  default = "***REMOVED***"
+  default = "c0nygre-c0nygre"
 }
 
 variable "db_schema_path" {
