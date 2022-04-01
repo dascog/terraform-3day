@@ -7,6 +7,7 @@
 ## AmazonDynamoDBFullAccess
 ## EC2InstanceConnect - this is just if you need to log into the EC2 instance to debug
 # I created a secret key from that account and used it to configure the AWS CLI on a VM (note: this will be deleted before the machine image is frozen.)
+# The account that is used will also need some quotas increased - VPCs to 20 per region, and EIPs to 100 per region, NAT gateways 20 per AZ. Also need to activate all regions. 
 
 # Using the CLIs
 ## You will need to help them decide which shell they are going to use. Most of what we will do will be through the command line. I have been using Git Bash and PowerShell with no problems. 
