@@ -22,7 +22,7 @@ yum update -y
 yum -y install java-1.8.0
 cd /home/ec2-user
 wget https://tinyurl.com/CompactDiscRestNoDatabase
-nohup java -jar CompactDiscRestNoDatabase.jar > ec2dep.log
+nohup java -jar CompactDiscRestNoDatabase > ec2dep.log
 ```
 
 - You can verify the application is running by pointing your browser at ``http://<your-ec2-dns>:8080/api``.
