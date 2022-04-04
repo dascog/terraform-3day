@@ -5,8 +5,11 @@
 Allstate*
 
 # jar files
-*.jar
+# *.jar
 
+# zip files
+*.zip
+  
 # .tfstate files
 *.tfstate
 *.tfstate.*
