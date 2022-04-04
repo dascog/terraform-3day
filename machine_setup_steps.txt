@@ -6,6 +6,37 @@
 ## AmazonRDSFullAccess
 ## AmazonDynamoDBFullAccess
 ## EC2InstanceConnect - this is just if you need to log into the EC2 instance to debug
+# On top of this it is worth creating an IAM policy that allows them to list and browse IAM, but only change their own password and create/update/delete their own access keys:
+{
+ "Version": "2012-10-17",
+ "Statement": [
+ {
+ "Effect": "Allow",
+ "Action": [
+ "iam:CreateServiceLinkedRole",
+ "iam:GenerateCredentialReport",
+ "iam:GenerateServiceLastAccessedDetails",
+ "iam:Get*",
+ "iam:List*",
+ "iam:PassRole",
+ "iam:SimulateCustomPolicy",
+ "iam:SimulatePrincipalPolicy"
+ ],
+ "Resource": "*"
+ },
+ {
+ "Effect": "Allow",
+ "Action": [
+ "iam:ChangePassword",
+ "iam:CreateAccessKey",
+ "iam:DeleteAccessKey",
+ "iam:UpdateAccessKey"
+ ],
+ "Resource": "arn:aws:iam::*:user/${aws:username}"
+ }
+ ]
+}
+
 # I created a secret key from that account and used it to configure the AWS CLI on a VM (note: this will be deleted before the machine image is frozen.)
 # The account that is used will also need some quotas increased - VPCs to 20 per region, and EIPs to 100 per region, NAT gateways 20 per AZ. Also need to activate all regions. 
 
