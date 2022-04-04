@@ -33,10 +33,10 @@ data "aws_ami" "amazon-linux-2" {
 ## We can now create the required resources
 ## Launch config, ELB, Security Groups, ASG
 
-resource "aws_key_pair" "ssh_key" {
-  key_name = "ssh_key"
-  public_key = file("ssh_key.pub")
-}
+# resource "aws_key_pair" "ssh_key" {
+#   key_name = "ssh_key"
+#   public_key = file("ssh_key.pub")
+# }
 
 # The Launch Configuration
 resource "aws_launch_configuration" "my_launch_config" {
@@ -45,14 +45,15 @@ resource "aws_launch_configuration" "my_launch_config" {
   instance_type          = "t2.micro"
   # For now use the same SG as the ELB. This could be changed for a different one to prevent direct access
   security_groups        = [aws_security_group.instance-sg.id]
-  key_name               = aws_key_pair.ssh_key.key_name
+  # key_name               = aws_key_pair.ssh_key.key_name
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
               yum -y install java-1.8.0
+              yum install ec2-instance-connect
               cd /home/ec2-user
-              wget http://training.conygre.com/compactdiscrestnodatabase.jar
-              nohup java -jar compactdiscapp.jar > ec2dep.log
+              wget https://tinyurl.com/CompactDiscRestNoDatabase
+              nohup java -jar CompactDiscRestNoDatabase > ec2dep.log
               EOF
   lifecycle {
     create_before_destroy = true
@@ -107,6 +108,13 @@ resource "aws_security_group" "instance-sg" {
     to_port = 8080
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+
   }
 }
 

@@ -10,4 +10,15 @@ This tutorial follows closely the Terraform tutorial at https://learn.hashicorp.
     command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ./schema.sql"
   }
   ```
+  In most cases this will provision your database exactly as needs be, however it can happen that Terraform attempts to run local-exec before the database is fully deployed, resulting in an error. The solution to this is a commonly used hack, in which a null resource is created that depends_on the database, and the local script is executed in that resource. In this case, rather than putting the ``local-exec`` block above in the ``db`` block, you add a new block as follows:
+
+  ```
+  resource "null_resource" "db_setup" {
+    depends_on = [aws_db_instance.db] #wait for the db to be ready
+    provisioner "local-exec" {
+      command = "mysql --host=${aws_db_instance.db.address} --port=${aws_db_instance.db.port} --user=${var.db_username} --password=${var.db_password} < ./schema.sql"
+    }
+  }
+  ```
+  
   4. Make your database more portable by creating a suitable set of variables to auto-assign names to resources and remove any magic strings. 

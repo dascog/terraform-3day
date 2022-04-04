@@ -177,8 +177,8 @@ resource "aws_launch_configuration" "my_launch_config" {
               yum update -y
               yum -y install java-1.8.0
               cd /home/ec2-user
-              wget http://training.conygre.com/compactdiscapp.jar
-              nohup java -jar compactdiscapp.jar > ec2dep.log
+              wget https://tinyurl.com/CompactDiscRestNoDatabase
+              nohup java -jar CompactDiscRestNoDatabase > ec2dep.log
               EOF
   lifecycle {
     create_before_destroy = true

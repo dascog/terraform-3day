@@ -78,7 +78,15 @@ resource "aws_db_instance" "db" {
   skip_final_snapshot    = true
 
   # Initialize the database with a schema
+  # provisioner "local-exec" {
+  #   command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ${var.db_schema_path}"
+  # }
+}
+# This is a common (rather grubby) hack to mitigate the fact that local-exec is sometimes run before the database is actually completely setup.
+# depends_on means that the command is held off until the database construction is complete  
+resource "null_resource" "db_setup" {
+  depends_on = [aws_db_instance.db] #wait for the db to be ready
   provisioner "local-exec" {
-    command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ${var.db_schema_path}"
+    command = "mysql --host=${aws_db_instance.db.address} --port=${aws_db_instance.db.port} --user=${var.db_username} --password=${var.db_password} < ./schema.sql"
   }
 }

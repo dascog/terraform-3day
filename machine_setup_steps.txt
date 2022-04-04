@@ -69,6 +69,11 @@ localhost ansible_connection=local
 # MYSQL
 - added the mysql.exe path to the PATH variable in git bash:
 $ export PATH=/c/Program\ Files/MySQL/MySQL\ Server\ 8.0/bin:$PATH
+- if you want to use mysql in the WSL you have to install it directly. This is necessary in the database creation configurations because they rely on a local-exec of the mysql command.
+
+# Tutorials
+- Check the urls in the autoscaling-ec2 demo, (tf and instructions), and the project solutions and readme. Make sure they point to something that actually is live! Both the website to curl the jar files and the database website. 
+
 
 
 # TIDY UP

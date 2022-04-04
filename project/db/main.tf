@@ -53,31 +53,37 @@ resource "aws_security_group" "rds" {
   }
 }
 
-resource "aws_db_parameter_group" "pg" {
-  name   = "${var.prefix}-${random_id.server.dec}-pg"
-  family = "mysql8.0"
+# resource "aws_db_parameter_group" "pg" {
+#   name   = "${var.prefix}-${random_id.server.dec}-pg"
+#   family = "mysql8.0"
 
-  parameter {
-    name  = "character_set_server"
-    value = "utf8"
-  }
-}
+#   parameter {
+#     name  = "character_set_server"
+#     value = "utf8"
+#   }
+# }
 
 resource "aws_db_instance" "db" {
   identifier             = "${var.prefix}-${random_id.server.dec}-db"
   instance_class         = "db.t2.micro"
   allocated_storage      = 5
-  engine                 = "mysql"
-  engine_version         = "8.0.28"
+  engine                 = "mariadb"
+  engine_version         = "10.2.43"
   username               = var.db_username
   password               = var.db_password
   db_subnet_group_name   = aws_db_subnet_group.sng.name
   vpc_security_group_ids = [aws_security_group.rds.id]
-  parameter_group_name   = aws_db_parameter_group.pg.name
+  //parameter_group_name   = aws_db_parameter_group.pg.name
   publicly_accessible    = true
   skip_final_snapshot    = true
 
+  # provisioner "local-exec" {
+  #   command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ./schema.sql"
+  # }
+}
+resource "null_resource" "setup_db" {
+  depends_on = [aws_db_instance.db] #wait for the db to be ready
   provisioner "local-exec" {
-    command = "mysql --host=${self.address} --port=${self.port} --user=${self.username} --password=${self.password} < ./schema.sql"
+    command = "mysql --host=${aws_db_instance.db.address} --port=${aws_db_instance.db.port} --user=${var.db_username} --password=${var.db_password} < ./schema.sql"
   }
 }
