@@ -5,6 +5,7 @@
 ## AmazonS3FullAccess
 ## AmazonRDSFullAccess
 ## AmazonDynamoDBFullAccess
+## IAMAccessAnalyzerFullAccess
 ## EC2InstanceConnect - this is just if you need to log into the EC2 instance to debug
 # On top of this it is worth creating an IAM policy that allows them to list and browse IAM, but only change their own password and create/update/delete their own access keys:
 {
@@ -36,6 +37,9 @@
  }
  ]
 }
+# Note that if you destroy all your infrastructure, you need to re-create the default vpcs for all the regions in the admin account. 
+# The aws command to do this is:
+aws ec2 create-default-vpc --region sa-east-1
 
 # I created a secret key from that account and used it to configure the AWS CLI on a VM (note: this will be deleted before the machine image is frozen.)
 # The account that is used will also need some quotas increased - VPCs to 20 per region, and EIPs to 100 per region, NAT gateways 20 per AZ. Also need to activate all regions. 

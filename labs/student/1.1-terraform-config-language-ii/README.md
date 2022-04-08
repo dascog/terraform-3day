@@ -13,7 +13,7 @@ This exercise combines a series of hashicorp terraform tutorials that cover some
 ## 4. Simplify Terraform Configuration with Locals
 - https://learn.hashicorp.com/tutorials/terraform/locals?in=terraform/configuration-language
 
-## 5. Customize Terraform Configuration with Variables 
+## 5. Customize Terraform Configuration with Variables (20mins)
 - https://learn.hashicorp.com/tutorials/terraform/variables?in=terraform/configuration-language
 
 ## 6. Build and Use a Local Module (15mins)

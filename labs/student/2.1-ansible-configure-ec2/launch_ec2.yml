@@ -27,6 +27,6 @@
         image: ami-060c4f2d72966500a
         count: 1
         group_id: "{{basic_firewall.group_id}}"
-        key_name: LinuxAnsible
+        key_name: "{{lookup('env', 'KEY_NAME')}}"
         region: eu-west-2
         wait: yes
